@@ -17,7 +17,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "body-parser": "1.20.3",
+    "amqplib": "0.10.3",
+    "body-parser": "1.20.2",
     "cookie-parser": "1.4.6",
     "cors": "2.8.5",
     "dotenv": "16.4.5",
@@ -38,6 +39,7 @@
     "@swc/core": "1.7.26",
     "@swc/helpers": "0.5.13",
     "@tsconfig/node20": "20.1.4",
+    "@types/amqplib": "0.10.4",
     "@types/cookie-parser": "1.4.7",
     "@types/cors": "2.8.17",
     "@types/express": "4.17.21",
