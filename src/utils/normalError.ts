@@ -1,6 +1,4 @@
-type NoThrowResult<A> = A extends Promise<infer U>
-  ? Promise<U | NormalizedError>
-  : A | NormalizedError;
+type NoThrowResult<A> = A extends Promise<infer U> ? Promise<U | NormalizedError> : A | NormalizedError;
 
 /** An `Error` object to safely handle `unknown` values being thrown. */
 export class NormalizedError extends Error {
@@ -62,26 +60,17 @@ export const isError = (value: unknown): value is Error =>
  *
  * @returns A `NormalizedError` object.
  */
-export const toNormalizedError = <E>(
-  value: E extends NormalizedError ? never : E
-): NormalizedError => {
+export const toNormalizedError = <E>(value: E extends NormalizedError ? never : E): NormalizedError => {
   if (isError(value)) {
     return new NormalizedError(value);
   } else {
     try {
       return new NormalizedError(
-        new Error(
-          `Unexpected value thrown: ${
-            typeof value === 'object' ? JSON.stringify(value) : String(value)
-          }`
-        ),
+        new Error(`Unexpected value thrown: ${typeof value === 'object' ? JSON.stringify(value) : String(value)}`),
         value
       );
     } catch {
-      return new NormalizedError(
-        new Error(`Unexpected value thrown: non-stringifiable object`),
-        value
-      );
+      return new NormalizedError(new Error(`Unexpected value thrown: non-stringifiable object`), value);
     }
   }
 };

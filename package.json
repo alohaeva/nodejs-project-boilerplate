@@ -6,7 +6,7 @@
   "scripts": {
     "build:watch": "tsc -w",
     "build": "rm -rf ./dist && NODE_ENV=production && tsc",
-    "dev": "nodemon --config nodemon.json",
+    "dev": "ts-node --watch ./src/index.ts",
     "start": "node dist/index.js",
     "lint": "eslint . --ext .ts --fix -c ./.eslintrc.json",
     "test": "jest"
@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "amqplib": "^0.10.3",
     "body-parser": "1.20.2",
     "cookie-parser": "1.4.6",
     "cors": "2.8.5",
@@ -27,6 +28,7 @@
     "uuid": "9.0.1"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.10.4",
     "@types/cookie-parser": "1.4.6",
     "@types/cors": "2.8.17",
     "@types/express": "4.17.21",

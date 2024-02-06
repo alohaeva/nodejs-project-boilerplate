@@ -8,9 +8,13 @@ import bodyParser from 'body-parser';
 import { logger, loggerInstance } from '../logger';
 import { appConfig } from '../config/Config';
 import apiV1Router from '../api/v1';
+import { testEventConsumer } from '../broker/consumers';
+import { Broker } from '../broker';
+import { publishTestEvent } from '../broker/publishers';
 
 const domainUrl = appConfig.get('common.domainUrl');
 const cookieSecret = appConfig.get('common.cookieSecret');
+const brokerConnection = appConfig.get('connections.broker');
 
 export class Server {
   app: Express;
@@ -39,6 +43,17 @@ export class Server {
   }
 
   async start(port: number) {
+    if (brokerConnection) {
+      await Broker.init(`${brokerConnection.protocol}://${brokerConnection.host}:${brokerConnection.port}`);
+
+      await testEventConsumer();
+      const data = await publishTestEvent({
+        hello: 'world',
+      });
+
+      console.log(data);
+    }
+
     this.server.listen(port);
   }
 
