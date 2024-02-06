@@ -10,13 +10,14 @@
   "scripts": {
     "build:watch": "tsc -w",
     "build": "rm -rf ./dist && NODE_ENV=production && tsc",
-    "dev": "nodemon --config nodemon.json",
+    "dev": "ts-node --watch ./src/index.ts",
     "start": "node dist/index.js",
     "lint": "eslint . --ext .ts --fix -c ./.eslintrc.json",
     "test:watch": "vitest watch",
     "test": "vitest run"
   },
   "dependencies": {
+    "amqplib": "0.10.3",
     "body-parser": "1.20.2",
     "cookie-parser": "1.4.6",
     "cors": "2.8.5",
@@ -31,6 +32,7 @@
     "zod-validation-error": "^3.3.1"
   },
   "devDependencies": {
+    "@types/amqplib": "0.10.4",
     "@swc/core": "1.7.6",
     "@swc/helpers": "0.5.12",
     "@tsconfig/node20": "20.1.4",
