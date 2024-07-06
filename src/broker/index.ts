@@ -1,9 +1,9 @@
 import { Connection } from 'amqplib';
 
-import { generateUuid } from '../utils/generators/generateUuid';
+import { generateUuid } from '../utils/generators/generateUuid.ts';
 
-import { getOrCreateBrokerConnection } from './connection';
-import { ConsumerHandler } from './types';
+import { getOrCreateBrokerConnection } from './connection.ts';
+import { ConsumerHandler } from './types.ts';
 
 export class Broker {
   static connection: Connection;
@@ -57,6 +57,7 @@ export class Broker {
 
               if (msg.properties.correlationId == correlationId) {
                 res(msg);
+                return;
               }
             },
             {
