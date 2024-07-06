@@ -41,7 +41,7 @@ export class Server {
   async start(port: number) {
     this.catchUncaughtException();
 
-    if (brokerConnection) {
+    if (brokerConnection && brokerConnection.enabled) {
       await Broker.init(`${brokerConnection.protocol}://${brokerConnection.host}:${brokerConnection.port}`);
 
       await testEventConsumer();

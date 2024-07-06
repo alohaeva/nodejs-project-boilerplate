@@ -6,7 +6,7 @@
     "node_modules/**/node_modules",
     "node_modules/"
   ],
-  "exec": "node --no-warnings=ExperimentalWarning --loader ts-node/esm ./index.js",
+  "exec": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/index.js",
   "watch": [
     "./src/"
   ],

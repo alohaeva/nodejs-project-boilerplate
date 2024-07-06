@@ -18,6 +18,7 @@ export default {
   },
   connections: {
     broker: {
+      enabled: false,
       host: BROKER_HOST,
       port: BROKER_PORT,
       protocol: BROKER_PROTOCOL,
