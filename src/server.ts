@@ -5,12 +5,12 @@ import express, { Express } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
-import { logger, loggerInstance } from '../logger/index.ts';
-import { appConfig } from '../config/Config.ts';
-import apiV1Router from '../api/v1/index.ts';
-import { testEventConsumer } from '../broker/consumers';
-import { Broker } from '../broker';
-import { publishTestEvent } from '../broker/publishers';
+import { appConfig } from './config/Config.ts';
+import { logger, loggerInstance } from './logger/index.ts';
+import apiV1Router from './api/v1/index.ts';
+import { Broker } from './broker/index.ts';
+import { testEventConsumer } from './broker/consumers/index.ts';
+import { publishTestEvent } from './broker/publishers/index.ts';
 
 const domainUrl = appConfig.get('common.domainUrl');
 const cookieSecret = appConfig.get('common.cookieSecret');
@@ -38,9 +38,19 @@ export class Server {
     this.app.use('/v1', apiV1Router);
   }
 
-  async start(port: number) {
+  start() {
     this.catchUncaughtException();
 
+    this.initBrokerConnection().catch(() => {
+      logger.info('Error while starting broker connection');
+    });
+
+    this.server.listen(port, () => {
+      logger.info(`Server is running at http://localhost:${port}`);
+    });
+  }
+
+  async initBrokerConnection() {
     if (brokerConnection && brokerConnection.enabled) {
       await Broker.init(`${brokerConnection.protocol}://${brokerConnection.host}:${brokerConnection.port}`);
 
@@ -51,10 +61,6 @@ export class Server {
 
       console.log(data);
     }
-
-    this.server.listen(port, () => {
-      logger.info(`Server is running at http://localhost:${port}`);
-    });
   }
 
   catchUncaughtException() {
