@@ -1,14 +1,21 @@
 {
-  "extends": "@tsconfig/node20/tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "test"],
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "src/test"],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
-    "target": "ES2022",
-    "module": "preserve",
+    "skipLibCheck": true,
+    "module": "ESNext",
     "moduleResolution": "bundler",
-    "lib": [],
-    "types": ["node"],
+    "target": "ESNext",
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "outDir": "dist",
+    "lib": [ "esnext" ],
+    "types": [ "node" ],
+    "baseUrl": "./",
+    "rootDir": "./", /* Specify the root folder within your source files. */
     "typeRoots": [
       "./node_modules/@types"
     ],
@@ -17,23 +24,14 @@
     "strictNullChecks": true,
     "alwaysStrict": true,
     "noImplicitReturns": true,
-    "inlineSourceMap": true,
     "inlineSources": true,
     "strictPropertyInitialization": false,
-    "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "sourceMap": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "skipLibCheck": true, /* Skip type checking all .d.ts files. */
     "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
-    "rootDir": "./src", /* Specify the root folder within your source files. */
-    "baseUrl": "./", /* Specify the base directory to resolve non-relative module names. */
-    "outDir": "./dist", /* Specify an output folder for all emitted files. */
     "removeComments": true, /* Disable emitting comments. */
-    "useUnknownInCatchVariables": true, /* Default catch clause variables as 'unknown' instead of 'any'. */
+    "useUnknownInCatchVariables": true /* Default catch clause variables as 'unknown' instead of 'any'. */
   },
   "ts-node": {
     "swc": true
