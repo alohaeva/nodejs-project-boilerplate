@@ -13,5 +13,9 @@ export default {
   server: {
     port: PORT || 8000,
   },
-  connections: {},
+  connections: {
+    mongo: {
+      uri: 'mongodb://localhost:27017/test',
+    },
+  },
 };

@@ -1,14 +1,16 @@
 # NodeJS Project Boilerplate
 
-## Implemented based on Best API Development Patterns
+## Features
 
 1. **Logging** - pino logger to add formatting, configuring transport, etc
-2. **Input Validation**
+2. **Input Validation** - zod to validate data in HTTP request
 3. **Authentication**
 4. **Authorization**
-5. **Data Access Patterns** - DTOs, Repositories
+5. **Data Access Patterns**
+   1. Repositories - access to data in DB performed strictly through repositories layer. Only repository has access to DB connection
+   2. DTOs with schema validation
 6. **Unit Tests**
-7. **API Versioning**
+7. **API Versioning** - at first there is `v1` version of the API
 8. **Domain Model** - Maintaining the code based on the Domain Model (`/services`)
 9. **Rate Limit**
 
@@ -24,6 +26,12 @@ git checkout main
 
 ```shell
 git checkout boilerplate/microservice-rabbit-mq
+````
+
+### Basic HTTP server with MongoDB CRUD features
+
+```shell
+git checkout boilerplate/mongodb
 ````
 
 ## How to start server
@@ -46,9 +54,7 @@ git checkout boilerplate/microservice-rabbit-mq
 
 If there is a need to change framework, for example use Fastify instead of Express. Server class should be changed accordingly
 
-`api/*` - NodeJS Framework specific implementation of API (For Express now). This folder imports all the data in `routes` folder
-
-`routes/*` - Implementation of routes for api, should not depend on NodeJS Framework
+`api/*` - NodeJS Framework specific implementation of API (For Express now)
 
 `services/*` - Implementation of business logic
 
