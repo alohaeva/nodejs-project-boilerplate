@@ -1,37 +1,37 @@
 import { IDBConnector } from '../interfaces/connectors/IDBConnector.ts';
 import { IRepository } from '../interfaces/repositories/IRepository.ts';
-import { CreateTodo, TodoDTO, todoDTOSchema, UpdateTodo } from '../dtos/TodoDTO.ts';
 import { IMongoDBConnection } from '../connectors/mongo/index.ts';
-import TodoSchema from '../schemas/TodoSchema.ts';
+import { TokenDTO, tokenDTOSchema, UpdateToken } from '../dtos/TokenDTO.ts';
+import TokenSchema from '../schemas/TokenSchema.ts';
 
-const MODEL_STRING = 'todos'
+const MODEL_STRING = 'tokens';
 
-export class TodosRepository implements IRepository<TodoDTO> {
+export class TokenRepository implements IRepository<TokenDTO> {
   constructor(private readonly dbConnector: IDBConnector<IMongoDBConnection>) {
-    this.dbConnector.connection.registerSchema(MODEL_STRING, TodoSchema);
+    this.dbConnector.connection.registerSchema(MODEL_STRING, TokenSchema);
   }
 
-  async create(data: CreateTodo): Promise<Pick<TodoDTO, 'id'>> {
+  async create(data: unknown): Promise<Pick<TokenDTO, 'id'>> {
     const model = this.dbConnector.connection.getModel(MODEL_STRING);
 
-    const [newTodo] = await model.create([data]);
+    const [newToken] = await model.create([data]);
 
-    const todo = todoDTOSchema.parse(newTodo);
+    const token = tokenDTOSchema.parse(newToken);
 
     return {
-      id: todo.id,
+      id: token.id,
     };
   }
 
-  async list(): Promise<TodoDTO[]> {
+  async list(): Promise<TokenDTO[]> {
     const model = this.dbConnector.connection.getModel(MODEL_STRING);
 
-    const items = await model.find();
+    const tokens = await model.find();
 
-    return items.map(item => todoDTOSchema.parse(item));
+    return tokens.map(token => tokenDTOSchema.parse(token));
   }
 
-  async getOne(id: string): Promise<TodoDTO | null> {
+  async getOne(id: string): Promise<TokenDTO | null> {
     const model = this.dbConnector.connection.getModel(MODEL_STRING);
 
     const item = await model.findOne({
@@ -42,7 +42,7 @@ export class TodosRepository implements IRepository<TodoDTO> {
       return null;
     }
 
-    return todoDTOSchema.parse(item);
+    return tokenDTOSchema.parse(item);
   }
 
   async deleteOne(id: string): Promise<void> {
@@ -53,7 +53,7 @@ export class TodosRepository implements IRepository<TodoDTO> {
     });
   }
 
-  async updateOne(id: string, updateData: UpdateTodo): Promise<void> {
+  async updateOne(id: string, updateData: UpdateToken): Promise<void> {
     const model = this.dbConnector.connection.getModel(MODEL_STRING);
 
     await model.updateOne(

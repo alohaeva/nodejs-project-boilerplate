@@ -1,5 +1,15 @@
 import { StatusCode } from 'status-code-enum';
 
+export enum Token {
+  Access = 'access',
+  Refresh = 'refresh',
+}
+
+type VerifyTokenSuccessResult<T> = { isValid: true; payload: T };
+type VerifyTokenFailResult = { isValid: false; payload: null };
+
+export type VerifyTokenResult<T> = VerifyTokenSuccessResult<T> | VerifyTokenFailResult;
+
 export type ErrorResult = {
   success: false;
   status: StatusCode;

@@ -6,6 +6,7 @@ import { sendResponse } from '../helpers/sendResponse.ts';
 import { validationMiddleware } from '../../validators/validationMiddleware.ts';
 
 import { todosRouter } from './todos/index.ts';
+import { authRouter } from './auth/index.ts';
 
 const apiV1Router = Router();
 
@@ -20,5 +21,6 @@ apiV1Router.post(helloRoute.path, validationMiddleware(helloRoute.payloadValidat
 });
 
 apiV1Router.use('/todos', todosRouter);
+apiV1Router.use('/auth', authRouter);
 
 export default apiV1Router;

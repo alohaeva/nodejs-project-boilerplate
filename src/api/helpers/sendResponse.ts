@@ -3,6 +3,8 @@ import { Response } from 'express';
 import { ErrorResult, SuccessResult } from '../../types.ts';
 
 export const sendResponse = <T>(res: Response, responseParams: SuccessResult<T> | ErrorResult) => {
+  console.log(responseParams);
+
   if (responseParams.success) {
     if (responseParams.cookie) {
       Object.entries(responseParams.cookie).forEach(entry => {

@@ -1,14 +1,14 @@
 import { postHelloMessageSchema } from '../dtos/hello.ts';
-import { createTodoEntitySchema, updateTodoEntitySchema } from '../entities/TodoEntity.ts';
+import { createTodoSchema, updateTodoSchema } from '../dtos/TodoDTO.ts';
 
 export const validateHelloPayload = (data: Record<string, string>) => {
   return postHelloMessageSchema.safeParse(data);
 };
 
 export const validateCreateToDoPayload = (data: Record<string, string>) => {
-  return createTodoEntitySchema.safeParse(data);
+  return createTodoSchema.safeParse(data);
 };
 
 export const validateUpdateToDoPayload = (data: Record<string, string>) => {
-  return updateTodoEntitySchema.safeParse(data);
+  return updateTodoSchema.safeParse(data);
 };

@@ -4,8 +4,8 @@
 
 1. **Logging** - pino logger to add formatting, configuring transport, etc
 2. **Input Validation** - zod to validate data in HTTP request
-3. **Authentication** - **to be implemented**
-4. **Authorization** - **to be implemented**
+3. **AuthN** - **to be implemented**
+4. **AuthZ** - **to be implemented**
 5. **Data Access Patterns**
    1. Repositories - access to data in DB performed strictly through repositories layer. Only repository has access to DB connection
    2. DTO - schema validation and sanitizing the payload for HTTP requests
