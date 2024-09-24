@@ -7,6 +7,7 @@ import MongoDBConnection from '../../../connectors/mongo/index.ts';
 import { validateCreateToDoPayload, validateUpdateToDoPayload } from '../../../validators/index.ts';
 import { TodosRepository } from '../../../repositories/ItemRepository.ts';
 import { TodosService } from '../../../services/TodosService.ts';
+import { authMiddleware } from '../../authMiddleware.ts';
 
 export const todosRouter = Router();
 
@@ -16,18 +17,38 @@ const todosRepo = new TodosRepository({
 
 const todosService = new TodosService(todosRepo);
 
-todosRouter.post('/', validationMiddleware(validateCreateToDoPayload), async (_: Request, res: Response) => {
-  const result = await todosService.create(res.locals.payload);
+todosRouter.post(
+  '/',
+  authMiddleware,
+  validationMiddleware(validateCreateToDoPayload),
+  async (_: Request, res: Response) => {
+    const result = await todosService.create(res.locals.payload);
 
-  return sendResponse(res, {
-    result,
-    status: StatusCode.SuccessOK,
-    success: true,
-  });
-});
+    return sendResponse(res, {
+      result,
+      status: StatusCode.SuccessOK,
+      success: true,
+    });
+  }
+);
 
-todosRouter.patch('/:id', validationMiddleware(validateUpdateToDoPayload), async (req: Request, res: Response) => {
-  const result = await todosService.update(req.params.id, res.locals.payload);
+todosRouter.patch(
+  '/:id',
+  authMiddleware,
+  validationMiddleware(validateUpdateToDoPayload),
+  async (req: Request, res: Response) => {
+    const result = await todosService.update(req.params.id, res.locals.payload);
+
+    return sendResponse(res, {
+      result,
+      status: StatusCode.SuccessOK,
+      success: true,
+    });
+  }
+);
+
+todosRouter.delete('/:id', authMiddleware, async (req: Request, res: Response) => {
+  const result = await todosService.delete(req.params.id);
 
   return sendResponse(res, {
     result,
@@ -38,16 +59,6 @@ todosRouter.patch('/:id', validationMiddleware(validateUpdateToDoPayload), async
 
 todosRouter.get('/:id', async (req: Request, res: Response) => {
   const result = await todosService.get(req.params.id);
-
-  return sendResponse(res, {
-    result,
-    status: StatusCode.SuccessOK,
-    success: true,
-  });
-});
-
-todosRouter.delete('/:id', async (req: Request, res: Response) => {
-  const result = await todosService.delete(req.params.id);
 
   return sendResponse(res, {
     result,

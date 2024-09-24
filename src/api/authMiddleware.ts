@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCode } from 'status-code-enum';
 
-import { TokenService } from '../services/TokenService';
+import { TokenService } from '../services/TokenService.ts';
 
 import { sendResponse } from './helpers/sendResponse.ts';
 
@@ -9,13 +9,11 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
   const authorisationHeader = req.headers['authorization'];
 
   if (authorisationHeader) {
-    const accessToken = authorisationHeader.replace('Bearer: ', '');
+    const accessToken = authorisationHeader.replace('Bearer ', '');
 
-    const tokenData = TokenService.verifyToken<{ email: string; id: string }>(accessToken);
+    const tokenData = TokenService.verifyToken<{ email: string }>(accessToken);
 
     if (tokenData.isValid) {
-      res.locals.userId = tokenData.payload.id;
-
       return next();
     }
   }

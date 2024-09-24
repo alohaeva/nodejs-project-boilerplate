@@ -4,7 +4,7 @@ import { CreateTodo, TodoDTO, todoDTOSchema, UpdateTodo } from '../dtos/TodoDTO.
 import { IMongoDBConnection } from '../connectors/mongo/index.ts';
 import TodoSchema from '../schemas/TodoSchema.ts';
 
-const MODEL_STRING = 'todos'
+const MODEL_STRING = 'todos';
 
 export class TodosRepository implements IRepository<TodoDTO> {
   constructor(private readonly dbConnector: IDBConnector<IMongoDBConnection>) {
