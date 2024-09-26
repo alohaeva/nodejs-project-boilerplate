@@ -14,7 +14,8 @@
     "start": "node --no-warnings=ExperimentalWarning --loader ts-node/esm ./index.js",
     "lint": "eslint . --ext .ts --fix -c ./.eslintrc.json",
     "test:watch": "vitest watch",
-    "test": "vitest run"
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "body-parser": "1.20.3",
@@ -47,12 +48,14 @@
     "@types/uuid": "10.0.0",
     "@typescript-eslint/eslint-plugin": "8.6.0",
     "@typescript-eslint/parser": "8.6.0",
+    "@vitest/coverage-istanbul": "^2.1.1",
     "concurrently": "9.0.1",
     "eslint": "8.57.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.30.0",
     "eslint-plugin-prettier": "5.2.1",
+    "node-mocks-http": "^1.16.0",
     "nodemon": "3.1.7",
     "prettier": "3.3.3",
     "ts-node": "10.9.2",
