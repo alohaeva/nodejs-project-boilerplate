@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
 
-import { AddTimeTypes, getTimeStamp, addTime, isDateBefore } from '../../../utils/dates/index.ts';
+import { addTime, AddTimeTypes, getTimeStamp, isDateBefore } from '../../../src/utils/dates';
 
 describe('should test getTimeStamp function', () => {
   it('should test AddTimeTypes.Day type', () => {

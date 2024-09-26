@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { chunkData } from '../../utils/transformers/chunkData.ts';
+import { chunkData } from '../../src/utils/transformers/chunkData.ts';
 
 describe('Test chunkData util function', () => {
   const initialArray = new Array(10).fill(0).map((_, i) => i);

@@ -47,7 +47,7 @@ git checkout boilerplate/authorization
 
 `index.ts` - file that exports `Server` class and initiate the server
 
-`server.ts` - file that builds the Server class and all the dependencies.
+`server.ts` - file that builds the Server class and all the dependencies
 
 If there is a need to change framework, for example use `Fastify` instead of `Express`. Server class should be changed accordingly
 
