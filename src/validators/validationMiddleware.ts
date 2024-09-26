@@ -13,8 +13,6 @@ export const validationMiddleware =
     try {
       const result = fn(req.body);
 
-      console.log(result);
-
       if (result.success) {
         res.locals.payload = result.data;
 
