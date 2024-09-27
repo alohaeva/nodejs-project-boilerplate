@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { firstLetterToUpperCase } from '../../src/utils/transformers/firstLetterToUpperCase.ts';
+import { firstLetterToUpperCase } from '../../../src/utils/transformers/firstLetterToUpperCase.ts';
 
 describe('Test firstLetterToUpperCase function', () => {
   it('Should return string with first capital letter', () => {
