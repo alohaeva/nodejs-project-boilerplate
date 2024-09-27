@@ -1,4 +1,5 @@
 import * as dateFns from 'date-fns';
+import { Duration } from 'date-fns';
 
 export enum AddTimeTypes {
   Year = 'years',
