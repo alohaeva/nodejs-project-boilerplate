@@ -1,4 +1,4 @@
-# NodeJS Project Boilerplate
+# Node.js Project Boilerplate
 
 ## Features
 
@@ -43,7 +43,8 @@ git checkout boilerplate/authorization
 
 **Prerequisites**
 
-- NodeJS version - `22.9.0`
+- Node.js version - `22.9.0`
+- Make sure you have running local instance of MongoDB to connect and provide connection string in `./src/config/vars.ts`
 
 1. Install dependencies - `npm install`
 2. Run development script to start server - `npm run dev`

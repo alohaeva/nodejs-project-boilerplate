@@ -1,9 +1,8 @@
 import { parseNumber } from '../utils/parse/parseNumber.ts';
-import { parseString } from '../utils/parse/parseString.ts';
 
 export const PORT = parseNumber(process.env.PORT, 8000);
-export const DOMAIN_URL = parseString(process.env.DOMAIN_URL, 'http://localhost:3000');
-export const COOKIE_SECRET = parseString(process.env.DOMAIN_URL, 'cookieSecret');
+export const DOMAIN_URL = process.env.DOMAIN_URL ?? 'http://localhost:3000';
+export const COOKIE_SECRET = process.env.DOMAIN_URL ?? 'cookieSecret';
 
 export default {
   common: {
@@ -11,7 +10,7 @@ export default {
     cookieSecret: COOKIE_SECRET,
   },
   server: {
-    port: PORT || 8000,
+    port: PORT,
   },
   connections: {
     mongo: {

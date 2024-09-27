@@ -13,13 +13,11 @@ export const REFRESH_TOKEN_EXPIRE_IN_SECONDS = 7 * 24 * 60 * 60 * 1000;
 export class TokenService {
   constructor(private readonly tokenRepository: IRepository<TokenDTO>) {}
 
-  async createToken(data: CreateToken): Promise<TokenDTO['id']> {
-    const generatedToken = TokenService.generateToken(data.type, {
-      email: data.email,
-    });
+  async createToken({ type, ...data }: CreateToken): Promise<TokenDTO['value']> {
+    const generatedToken = TokenService.generateToken(type, data);
 
     const newToken = await this.tokenRepository.create({
-      type: data.type,
+      type,
       value: generatedToken,
     });
 

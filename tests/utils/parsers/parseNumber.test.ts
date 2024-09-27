@@ -26,4 +26,10 @@ describe('Test parseNumber', () => {
 
     expect(result).toEqual(100);
   });
+
+  it('Should fallback to default value if first argument is undefined (from process environments variables)', () => {
+    const result = parseNumber(undefined, 100);
+
+    expect(result).toEqual(100);
+  });
 });

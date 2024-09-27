@@ -22,8 +22,6 @@ describe('Test validateUpdateToDoPayload', () => {
 
     const validationErrors = fromError(result.error);
 
-    console.log(validationErrors.toString());
-
     expect(result.success).toBeFalsy();
     expect(validationErrors.toString()).toEqual('Validation error: field should be string at "action"');
   });
