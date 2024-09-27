@@ -5,6 +5,11 @@ export enum Token {
   Refresh = 'refresh',
 }
 
+export enum Roles {
+  User = 'user',
+  Admin = 'admin',
+}
+
 type VerifyTokenSuccessResult<T> = { isValid: true; payload: T };
 type VerifyTokenFailResult = { isValid: false; payload: null };
 

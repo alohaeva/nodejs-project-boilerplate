@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from 'vitest';
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 
 import { TokenService } from '../../src/services/TokenService.ts';
 import { MockOf } from '../helpers';
 import { IRepository } from '../../src/interfaces/repositories/IRepository.ts';
 import { TokenDTO } from '../../src/dtos/TokenDTO.ts';
-import { Token } from '../../src/types.ts';
-import mongoose from 'mongoose';
+import { Roles, Token } from '../../src/types.ts';
 
 describe('Test TokenService', () => {
   it('should create Access Token with same type', () => {
@@ -78,6 +78,7 @@ describe('Test TokenService', () => {
 
     const token = TokenService.generateToken(Token.Access, {
       email: 'read',
+      role: Roles.User,
     });
 
     vi.spyOn(mockTokenRepo, 'create').mockResolvedValueOnce({
@@ -94,6 +95,7 @@ describe('Test TokenService', () => {
     const result = await tokenService.createToken({
       type: Token.Access,
       email: 'read',
+      role: Roles.User,
     });
 
     expect(result).toEqual(token);

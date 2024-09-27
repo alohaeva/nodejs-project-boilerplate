@@ -8,6 +8,7 @@ import { validateCreateToDoPayload, validateUpdateToDoPayload } from '../../../v
 import { TodosRepository } from '../../../repositories/ItemRepository.ts';
 import { TodosService } from '../../../services/TodosService.ts';
 import { authMiddleware } from '../../authMiddleware.ts';
+import { Roles } from '../../../types.ts';
 
 export const todosRouter = Router();
 
@@ -19,7 +20,7 @@ const todosService = new TodosService(todosRepo);
 
 todosRouter.post(
   '/',
-  authMiddleware,
+  authMiddleware(Roles.User),
   validationMiddleware(validateCreateToDoPayload),
   async (_: Request, res: Response) => {
     const result = await todosService.create(res.locals.payload);
@@ -34,7 +35,7 @@ todosRouter.post(
 
 todosRouter.patch(
   '/:id',
-  authMiddleware,
+  authMiddleware(Roles.User),
   validationMiddleware(validateUpdateToDoPayload),
   async (req: Request, res: Response) => {
     const result = await todosService.update(req.params.id, res.locals.payload);
@@ -47,7 +48,7 @@ todosRouter.patch(
   }
 );
 
-todosRouter.delete('/:id', authMiddleware, async (req: Request, res: Response) => {
+todosRouter.delete('/:id', authMiddleware(Roles.Admin), async (req: Request, res: Response) => {
   const result = await todosService.delete(req.params.id);
 
   return sendResponse(res, {

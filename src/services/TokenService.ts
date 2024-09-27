@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { Token, VerifyTokenResult } from '../types.ts';
 import { logger } from '../logger/index.ts';
 import { IRepository } from '../interfaces/repositories/IRepository.ts';
-import { CreateToken, TokenDTO, tokenDTOSchema } from '../dtos/TokenDTO.ts';
+import { AuthenticateDTO, CreateToken, TokenDTO, tokenDTOSchema } from '../dtos/TokenDTO.ts';
 
 const secret = 'jwtToken';
 
@@ -13,7 +13,7 @@ export const REFRESH_TOKEN_EXPIRE_IN_SECONDS = 7 * 24 * 60 * 60 * 1000;
 export class TokenService {
   constructor(private readonly tokenRepository: IRepository<TokenDTO>) {}
 
-  async createToken({ type, ...data }: CreateToken): Promise<TokenDTO['value']> {
+  async createToken({ type, ...data }: CreateToken & AuthenticateDTO): Promise<TokenDTO['value']> {
     const generatedToken = TokenService.generateToken(type, data);
 
     const newToken = await this.tokenRepository.create({

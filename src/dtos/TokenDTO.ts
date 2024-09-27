@@ -1,7 +1,7 @@
 import z from 'zod';
 import mongoose from 'mongoose';
 
-import { Token } from '../types.ts';
+import { Roles, Token } from '../types.ts';
 
 export const tokenDTOSchema = z.object({
   id: z.string().refine(val => mongoose.Types.ObjectId.isValid(val), 'id value is not valid ObjectId'),
@@ -20,6 +20,12 @@ export const createTokenSchema = z.object({
   email: z.string(),
 });
 
+export const authenticateSchema = z.object({
+  role: z.nativeEnum(Roles),
+  email: z.string(),
+});
+
 export type TokenDTO = z.infer<typeof tokenDTOSchema>;
 export type UpdateToken = z.infer<typeof updateTokenSchema>;
 export type CreateToken = z.infer<typeof createTokenSchema>;
+export type AuthenticateDTO = z.infer<typeof authenticateSchema>;
