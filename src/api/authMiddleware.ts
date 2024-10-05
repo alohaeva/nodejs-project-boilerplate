@@ -19,14 +19,23 @@ export const authMiddleware =
         if ([role, Roles.Admin].includes(tokenData.payload.role)) {
           if (tokenData.payload.scopes.some(tokenScope => tokenScope === scope)) {
             return next();
+          } else {
+            return sendResponse(res, {
+              status: StatusCode.ClientErrorForbidden,
+              success: false,
+              error: {
+                code: StatusCode.ClientErrorForbidden,
+                message: 'insufficient scope',
+              },
+            });
           }
         }
 
         return sendResponse(res, {
-          status: StatusCode.ClientErrorUnauthorized,
+          status: StatusCode.ClientErrorForbidden,
           success: false,
           error: {
-            code: StatusCode.ClientErrorUnauthorized,
+            code: StatusCode.ClientErrorForbidden,
             message: 'insufficient role',
           },
         });
