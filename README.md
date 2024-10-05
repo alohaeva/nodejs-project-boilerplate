@@ -4,11 +4,13 @@
 
 1. **Logging** - pino logger to add formatting, configuring transport, etc
 2. **Input Validation** - `zod` to validate data in HTTP request
-3. **AuthN** - some routes are behind simple JWT token authorization, also separate auth route is configured to get tokens
-4. **AuthZ** - Authenticated routes has RBAC AuthZ with user and admin roles
+3. **AuthN** - some routes are behind simple JWT authorization, also separate auth route is configured to get tokens
+4. **AuthZ**
+   1. RBAC - AuthZ with user and admin roles
+   2. SBAC (TBI) - access resources based on requested scope (read/write)
 5. **Data Access Patterns**
    1. Repositories - access to data in DB performed strictly through repositories layer. Only repository has access to DB connection
-   2. DTO - schema validation and sanitizing the request and response payload for HTTP requests
+   2. DTO - schema validation, sanitizing request/response payload, transforming database data to DTO
 6. **Unit Tests** - tests are implemented in `./tests` folder
 7. **API Versioning** - at first there is `v1` version of the API
 8. **Domain Model** - Maintaining the code based on the Domain Model (`/services`)
