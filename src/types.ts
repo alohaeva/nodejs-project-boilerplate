@@ -10,6 +10,11 @@ export enum Roles {
   Admin = 'admin',
 }
 
+export enum Scopes {
+  Read = 'read',
+  Write = 'write',
+}
+
 type VerifyTokenSuccessResult<T> = { isValid: true; payload: T };
 type VerifyTokenFailResult = { isValid: false; payload: null };
 

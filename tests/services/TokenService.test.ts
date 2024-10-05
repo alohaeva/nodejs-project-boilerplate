@@ -79,6 +79,7 @@ describe('Test TokenService', () => {
     const token = TokenService.generateToken(Token.Access, {
       email: 'read',
       role: Roles.User,
+      scopes: ['read'],
     });
 
     vi.spyOn(mockTokenRepo, 'create').mockResolvedValueOnce({
@@ -96,6 +97,7 @@ describe('Test TokenService', () => {
       type: Token.Access,
       email: 'read',
       role: Roles.User,
+      scopes: ['read'],
     });
 
     expect(result).toEqual(token);

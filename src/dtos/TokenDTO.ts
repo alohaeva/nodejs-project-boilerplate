@@ -1,7 +1,7 @@
 import z from 'zod';
 import mongoose from 'mongoose';
 
-import { Roles, Token } from '../types.ts';
+import { Roles, Scopes, Token } from '../types.ts';
 
 export const tokenDTOSchema = z.object({
   id: z.string().refine(val => mongoose.Types.ObjectId.isValid(val), 'id value is not valid ObjectId'),
@@ -22,6 +22,14 @@ export const createTokenSchema = z.object({
 
 export const authenticateSchema = z.object({
   role: z.nativeEnum(Roles),
+  scopes: z
+    .string()
+    .optional()
+    .transform(scopes => (scopes ?? 'read').split(',').map(scope => scope.trim()))
+    .refine(
+      scopes => scopes.map(scope => scope.trim()).every(scope => Object.values(Scopes).includes(scope as Scopes)),
+      'Not valid scope array string. Provide comma separated string with scopes array'
+    ),
   email: z.string(),
 });
 
