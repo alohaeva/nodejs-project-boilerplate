@@ -13,6 +13,26 @@ const apiV1Router = Router();
 
 const helloService = new HelloService();
 
+/**
+ * @swagger
+ * /v1/hello:
+ *   post:
+ *     summary: Returns a sample message using name field in payload
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Name to use within message generation.
+ *                 example: John
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
 apiV1Router.post('/hello', validationMiddleware(validateHelloPayload), (_: Request, res: Response) => {
   const result = helloService.handler(res.locals.payload);
 
@@ -24,6 +44,7 @@ apiV1Router.post('/hello', validationMiddleware(validateHelloPayload), (_: Reque
 });
 
 apiV1Router.use('/todos', todosRouter);
+
 apiV1Router.use('/auth', authRouter);
 
 export default apiV1Router;

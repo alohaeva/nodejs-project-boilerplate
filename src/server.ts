@@ -5,6 +5,8 @@ import express, { Express } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
+import { swaggerSpecs, swaggerUI } from '../swagger.ts';
+
 import { logger, loggerInstance } from './logger/index.ts';
 import { appConfig } from './config/Config.ts';
 import apiV1Router from './api/v1/index.ts';
@@ -32,8 +34,8 @@ export class Server {
     );
     this.app.use(bodyParser.json());
     this.app.use(cookieParser(cookieSecret));
-
     this.app.use('/v1', apiV1Router);
+    this.app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
   }
 
   async start() {
