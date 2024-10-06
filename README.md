@@ -1,12 +1,19 @@
-# NodeJS Project Boilerplate
+# Node.js Project Boilerplate
 
 ## Features
 
 1. **Logging** - pino logger to add formatting, configuring transport, etc
-2. **Input Validation** - zod to validate data in HTTP request
-3. **Unit Tests** - provide increased quality for the source code
-4. **API Versioning** - at first there is `v1` version of the API
-5. **Domain Model** - Maintaining the code based on the Domain Model (`/services`)
+2. **Input Validation** - `zod` to validate data in HTTP request
+3. **AuthN** - some routes are behind simple JWT authorization, also separate auth route is configured to get tokens
+4. **AuthZ**
+   1. RBAC - AuthZ with user and admin roles
+   2. SBAC (TBI) - access resources based on requested scope (read/write)
+5. **Data Access Patterns**
+   1. Repositories - access to data in DB performed strictly through repositories layer. Only repository has access to DB connection
+   2. DTO - schema validation, sanitizing request/response payload, transforming database data to DTO
+6. **Unit Tests** - tests are implemented in `./tests` folder
+7. **API Versioning** - at first there is `v1` version of the API
+8. **Domain Model** - Maintaining the code based on the Domain Model (`/services`)
 
 ## Supported Templates
 
@@ -38,7 +45,8 @@ git checkout boilerplate/authorization
 
 **Prerequisites**
 
-- NodeJS version - `22.9.0`
+- Node.js version - `22.9.0`
+- Make sure you have running local instance of MongoDB to connect and provide connection string in `./src/config/vars.ts`
 
 1. Install dependencies - `npm install`
 2. Run development script to start server - `npm run dev`

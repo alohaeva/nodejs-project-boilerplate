@@ -8,10 +8,12 @@ import bodyParser from 'body-parser';
 import { logger, loggerInstance } from './logger/index.ts';
 import { appConfig } from './config/Config.ts';
 import apiV1Router from './api/v1/index.ts';
+import MongoDBConnection from './connectors/mongo/index.ts';
 
 const domainUrl = appConfig.get('common.domainUrl');
 const cookieSecret = appConfig.get('common.cookieSecret');
 const port = appConfig.get('server.port');
+const mongodb = appConfig.get('connections.mongo');
 
 export class Server {
   app: Express;
@@ -34,8 +36,14 @@ export class Server {
     this.app.use('/v1', apiV1Router);
   }
 
-  start() {
+  async start() {
     this.catchUncaughtException();
+
+    if (mongodb?.uri) {
+      await MongoDBConnection.connect({
+        uri: mongodb.uri,
+      });
+    }
 
     this.server.listen(port, () => {
       logger.info(`Server is running at http://localhost:${port}`);
