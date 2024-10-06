@@ -2,12 +2,16 @@
 
 ## Features
 
+```shell
+git checkout main
+```
+
 1. **Logging** - pino logger to add formatting, configuring transport, etc
 2. **Input Validation** - `zod` to validate data in HTTP request
 3. **AuthN** - some routes are behind simple JWT authorization, also separate auth route is configured to get tokens
 4. **AuthZ**
    1. RBAC - AuthZ with user and admin roles
-   2. SBAC (TBI) - access resources based on requested scope (read/write)
+   2. SBAC - access resources based on requested scope (read/write)
 5. **Data Access Patterns**
    1. Repositories - access to data in DB performed strictly through repositories layer. Only repository has access to DB connection
    2. DTO - schema validation, sanitizing request/response payload, transforming database data to DTO
@@ -20,22 +24,22 @@
 ### Basic HTTP Server
 
 ```shell
-git checkout main
+git checkout boilerplate/base
 ```
 
-### Basic HTTP server with RabbitMQ communication
+### RabbitMQ integration
 
 ```shell
 git checkout boilerplate/microservice-rabbit-mq
 ````
 
-### Basic HTTP server with MongoDB CRUD features
+### MongoDB integration with CRUD API
 
 ```shell
 git checkout boilerplate/mongodb
 ````
 
-### Basic HTTP server with AuthN and AuthZ
+### AuthN and AuthZ implementation
 
 ```shell
 git checkout boilerplate/authorization
@@ -51,7 +55,15 @@ git checkout boilerplate/authorization
 1. Install dependencies - `npm install`
 2. Run development script to start server - `npm run dev`
 
-## Project's Architecture Considerations
+
+## How to test code
+
+```shell
+npm run test # to run all tests
+npm run coverage # to run tests with coverage
+```
+
+## Project's Code Structure Considerations
 
 `index.ts` - file that exports `Server` class and initiate the server
 
