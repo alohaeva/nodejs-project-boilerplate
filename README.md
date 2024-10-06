@@ -53,6 +53,12 @@ git checkout boilerplate/authorization
 git checkout boilerplate/swagger
 ````
 
+### Offset based pagination
+
+```shell
+git checkout boilerplate/pagination
+````
+
 ## How to start server
 
 **Prerequisites**
