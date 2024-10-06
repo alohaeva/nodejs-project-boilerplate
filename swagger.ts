@@ -10,9 +10,7 @@ const options = {
       description: 'Todo HTTP API swagger documentation',
     },
   },
-  apis: [
-    './src/api/v1/**/*.ts'
-  ], // Path to your API routes
+  apis: ['./src/api/v1/**/*.ts'], // Path to your API routes
 };
 
 export const swaggerSpecs = swaggerJsdoc(options);
