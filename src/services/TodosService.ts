@@ -1,5 +1,5 @@
 import { IRepository } from '../interfaces/repositories/IRepository.ts';
-import { CreateTodo, TodoDTO, UpdateTodo } from '../dtos/TodoDTO.ts';
+import { CreateTodo, ListTodosOptions, TodoDTO, UpdateTodo } from '../dtos/TodoDTO.ts';
 
 export class TodosService {
   constructor(private readonly todosRepository: IRepository<TodoDTO>) {}
@@ -14,8 +14,8 @@ export class TodosService {
     return this.todosRepository.getOne(id);
   }
 
-  async list(): Promise<TodoDTO[]> {
-    return this.todosRepository.list();
+  async list(options: ListTodosOptions): Promise<TodoDTO[]> {
+    return this.todosRepository.list(options);
   }
 
   async delete(id: string): Promise<void> {

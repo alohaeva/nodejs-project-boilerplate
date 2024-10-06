@@ -18,6 +18,8 @@ git checkout main
 6. **Unit Tests** - tests are implemented in `./tests` folder
 7. **API Versioning** - at first there is `v1` version of the API
 8. **Domain Model** - Maintaining the code based on the Domain Model (`/services`)
+9. **Swagger Documentation** - JSDoc-first documentation
+10. **Pagination** - offset-based pagination
 
 ## Supported Templates
 
@@ -43,6 +45,12 @@ git checkout boilerplate/mongodb
 
 ```shell
 git checkout boilerplate/authorization
+````
+
+### Swagger OpenAPI Documentation
+
+```shell
+git checkout boilerplate/swagger
 ````
 
 ## How to start server
