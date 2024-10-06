@@ -1,6 +1,6 @@
 import { IDBConnector } from '../interfaces/connectors/IDBConnector.ts';
 import { IRepository } from '../interfaces/repositories/IRepository.ts';
-import { CreateTodo, TodoDTO, todoDTOSchema, UpdateTodo } from '../dtos/TodoDTO.ts';
+import { CreateTodo, ListTodosOptions, TodoDTO, todoDTOSchema, UpdateTodo } from '../dtos/TodoDTO.ts';
 import { IMongoDBConnection } from '../connectors/mongo/index.ts';
 import TodoSchema from '../schemas/TodoSchema.ts';
 
@@ -23,10 +23,17 @@ export class TodosRepository implements IRepository<TodoDTO> {
     };
   }
 
-  async list(): Promise<TodoDTO[]> {
+  async list(options: ListTodosOptions): Promise<TodoDTO[]> {
     const model = this.dbConnector.connection.getModel(MODEL_STRING);
 
-    const items = await model.find();
+    const items = await model.find(
+      {},
+      {},
+      {
+        skip: options.offset,
+        limit: options.limit,
+      }
+    );
 
     return items.map(item => todoDTOSchema.parse(item));
   }

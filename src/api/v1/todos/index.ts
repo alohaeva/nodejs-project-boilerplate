@@ -9,6 +9,7 @@ import { TodosRepository } from '../../../repositories/ItemRepository.ts';
 import { TodosService } from '../../../services/TodosService.ts';
 import { authMiddleware } from '../../authMiddleware.ts';
 import { Roles, Scopes } from '../../../types.ts';
+import { listTodosOptionsSchema } from '../../../dtos/TodoDTO.ts';
 
 export const todosRouter = Router();
 
@@ -156,8 +157,10 @@ todosRouter.get('/:id', authMiddleware(Roles.User, Scopes.Read), async (req: Req
  *       200:
  *         description: A successful response
  */
-todosRouter.get('/', authMiddleware(Roles.User, Scopes.Read), async (_: Request, res: Response) => {
-  const result = await todosService.list();
+todosRouter.get('/', authMiddleware(Roles.User, Scopes.Read), async (req: Request, res: Response) => {
+  const options = listTodosOptionsSchema.parse(req.query);
+
+  const result = await todosService.list(options);
 
   return sendResponse(res, {
     result,
