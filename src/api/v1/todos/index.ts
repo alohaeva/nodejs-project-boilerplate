@@ -18,6 +18,26 @@ const todosRepo = new TodosRepository({
 
 const todosService = new TodosService(todosRepo);
 
+/**
+ * @swagger
+ * /v1/todos:
+ *   post:
+ *     summary: Creates new record
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               action:
+ *                 type: string
+ *                 description: action property indicating what should be done
+ *                 example: Update documentation
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
 todosRouter.post(
   '/',
   authMiddleware(Roles.User, Scopes.Write),
@@ -33,6 +53,33 @@ todosRouter.post(
   }
 );
 
+/**
+ * @swagger
+ * /v1/todos/{id}:
+ *   patch:
+ *     summary: Updates new record
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the todo item to update.
+ *         schema:
+ *           type: ObjectId
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               action:
+ *                 type: string
+ *                 description: action property indicating what should be done
+ *                 example: Update documentation
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
 todosRouter.patch(
   '/:id',
   authMiddleware(Roles.User, Scopes.Write),
@@ -48,6 +95,22 @@ todosRouter.patch(
   }
 );
 
+/**
+ * @swagger
+ * /v1/todos/{id}:
+ *   delete:
+ *     summary: Delete existing record
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the todo item to delete.
+ *         schema:
+ *           type: ObjectId
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
 todosRouter.delete('/:id', authMiddleware(Roles.Admin, Scopes.Write), async (req: Request, res: Response) => {
   const result = await todosService.delete(req.params.id);
 
@@ -58,6 +121,22 @@ todosRouter.delete('/:id', authMiddleware(Roles.Admin, Scopes.Write), async (req
   });
 });
 
+/**
+ * @swagger
+ * /v1/todos/{id}:
+ *   get:
+ *     summary: Retrieve existing record
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the todo item to retrieve.
+ *         schema:
+ *           type: ObjectId
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
 todosRouter.get('/:id', authMiddleware(Roles.User, Scopes.Read), async (req: Request, res: Response) => {
   const result = await todosService.get(req.params.id);
 
@@ -68,6 +147,15 @@ todosRouter.get('/:id', authMiddleware(Roles.User, Scopes.Read), async (req: Req
   });
 });
 
+/**
+ * @swagger
+ * /v1/todos:
+ *   get:
+ *     summary: Retrieve list of records
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */
 todosRouter.get('/', authMiddleware(Roles.User, Scopes.Read), async (_: Request, res: Response) => {
   const result = await todosService.list();
 
