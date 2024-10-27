@@ -13,7 +13,11 @@ export const authMiddleware =
     if (authorisationHeader) {
       const accessToken = authorisationHeader.replace('Bearer ', '');
 
-      const tokenData = TokenService.verifyToken<{ email: string; role: Roles; scopes: Scopes[] }>(accessToken);
+      const tokenData = TokenService.verifyToken<{
+        email: string;
+        role: Roles;
+        scopes: Scopes[];
+      }>(accessToken);
 
       if (tokenData.isValid) {
         if ([role, Roles.Admin].includes(tokenData.payload.role)) {
