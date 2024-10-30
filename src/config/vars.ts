@@ -15,7 +15,8 @@ export default {
   },
   connections: {
     mongo: {
-      uri: 'mongodb://localhost:27017/test',
+      // uri: 'mongodb://localhost:27017/test',
+      uri: '',
     },
   },
 };
