@@ -2,10 +2,6 @@
 
 ## Features
 
-```shell
-git checkout main
-```
-
 1. **Logging** - pino logger to add formatting, configuring transport, etc
 2. **Input Validation** - `zod` to validate data in HTTP request
 3. **AuthN** - some routes are behind simple JWT authorization, also separate auth route is configured to get tokens
@@ -18,32 +14,6 @@ git checkout main
 6. **Unit Tests** - tests are implemented in `./tests` folder
 7. **API Versioning** - at first there is `v1` version of the API
 8. **Domain Model** - Maintaining the code based on the Domain Model (`/services`)
-
-## Supported Templates
-
-### Basic HTTP Server
-
-```shell
-git checkout boilerplate/base
-```
-
-### RabbitMQ integration
-
-```shell
-git checkout boilerplate/microservice-rabbit-mq
-````
-
-### MongoDB integration with CRUD API
-
-```shell
-git checkout boilerplate/mongodb
-````
-
-### AuthN and AuthZ implementation
-
-```shell
-git checkout boilerplate/authorization
-````
 
 ## How to start server
 
