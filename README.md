@@ -50,7 +50,7 @@ git checkout boilerplate/authorization
 ### Swagger OpenAPI Documentation
 
 ```shell
-git checkout boilerplate/swagger
+git checkout boilerplate/swagger-api
 ````
 
 ### Offset based pagination
