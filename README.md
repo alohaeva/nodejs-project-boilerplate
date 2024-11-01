@@ -15,32 +15,6 @@
 7. **API Versioning** - at first there is `v1` version of the API
 8. **Domain Model** - Maintaining the code based on the Domain Model (`/services`)
 
-## Supported Templates
-
-### Basic HTTP Server
-
-```shell
-git checkout main
-```
-
-### Basic HTTP server with RabbitMQ communication
-
-```shell
-git checkout boilerplate/microservice-rabbit-mq
-````
-
-### Basic HTTP server with MongoDB CRUD features
-
-```shell
-git checkout boilerplate/mongodb
-````
-
-### Basic HTTP server with AuthN and AuthZ
-
-```shell
-git checkout boilerplate/authorization
-````
-
 ## How to start server
 
 **Prerequisites**
