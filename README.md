@@ -12,20 +12,6 @@
 8. **Domain Model** - Maintaining the code based on the Domain Model (`/services`)
 9. **Rate Limit**
 
-## Supported Templates
-
-### Basic HTTP Server
-
-```shell
-git checkout main
-```
-
-### Basic HTTP server with RabbitMQ communication
-
-```shell
-git checkout boilerplate/microservice-rabbit-mq
-````
-
 ## How to start server
 
 **Prerequisites**
